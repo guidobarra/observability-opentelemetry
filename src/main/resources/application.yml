@@ -1,0 +1,29 @@
+server:
+  port: 9292
+  servlet:
+    context-path: '@app.context-path@'
+
+spring:
+  main:
+    banner-mode: 'off'
+  application:
+    name: '@project.artifactId@'
+  profiles:
+    active: '@activatedProperties@'
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+---
+spring:
+  config:
+    activate:
+      on-profile: beta
+
+server:
+  port: 9292
+  servlet:
+    context-path: /client

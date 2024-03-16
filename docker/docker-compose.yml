@@ -1,0 +1,24 @@
+version: "3.6"
+
+services:
+
+  java_spring_app:
+    image: java_spring_app
+    container_name: java_spring_app
+    hostname: java_spring_app
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    environment:
+      OTEL_TRACES_EXPORTER: "logging"
+      OTEL_METRICS_EXPORTER: "logging"
+      OTEL_LOGS_EXPORTER: "logging"
+    ports:
+      - "9292:9292"
+    networks:
+      - network_app
+
+
+networks:
+  network_app:
+    name: network_app
