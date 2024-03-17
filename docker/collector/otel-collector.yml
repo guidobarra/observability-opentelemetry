@@ -8,9 +8,14 @@ processors:
   batch:
     send_batch_max_size: 1000
     send_batch_size: 100
-    timeout: 10s
+    timeout: 5s
 
 exporters:
+  prometheusremotewrite:
+    endpoint: "http://prometheus:9090/api/v1/write"
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    enable_open_metrics: true
   otlp/jaeger:
     endpoint: "http://jaeger:4317"
     tls:
@@ -27,6 +32,11 @@ exporters:
 
 service:
   pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      #exporters: [prometheusremotewrite] # dash java does not work
+      exporters: [prometheus]
     traces:
       receivers: [otlp]
       processors: [batch]
