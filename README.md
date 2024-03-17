@@ -38,3 +38,12 @@ observability with opentelemetry for app java
 ## zipkin
 
 [link](http://localhost:9411/zipkin/)
+
+
+## prometheus
+
+[link](http://localhost:9090/targets?search=)
+
+## grafana
+
+[link](http://localhost:3000/)
