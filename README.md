@@ -30,3 +30,11 @@ observability with opentelemetry for app java
 ## swagger
 
 [link](http://localhost:9292/client/swagger-ui/index.html)
+
+## jaeger
+
+[link](http://localhost:16686/search)
+
+## zipkin
+
+[link](http://localhost:9411/zipkin/)

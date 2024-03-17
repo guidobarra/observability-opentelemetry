@@ -11,16 +11,21 @@ services:
       dockerfile: ./docker/Dockerfile
     environment:
       OTEL_SERVICE_NAME: "client-service"
-      OTEL_TRACES_EXPORTER: "jaeger"
+      OTEL_TRACES_EXPORTER: "jaeger,zipkin"
       OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14250"
+      OTEL_EXPORTER_ZIPKIN_ENDPOINT: "http://zipkin:9411/api/v2/spans"
       OTEL_METRICS_EXPORTER: "logging"
       OTEL_LOGS_EXPORTER: "logging"
     ports:
       - "9292:9292"
+    depends_on:
+      - jaeger
+      - postgres
+      - zipkin
     networks:
       - network_app
 
-  jaeger-all-in-one:
+  jaeger:
     container_name: jaeger
     image: jaegertracing/all-in-one:latest
     environment:
@@ -29,6 +34,15 @@ services:
     ports:
       - "16686:16686"
       - "14250"
+    networks:
+      - network_app
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin:latest
+    restart: always
+    ports:
+      - "9411:9411"
     networks:
       - network_app
 

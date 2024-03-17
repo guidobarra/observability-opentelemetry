@@ -39,6 +39,8 @@ spring:
       on-profile: beta
   datasource:
     url: jdbc:postgresql://postgres:5432/client_db?useSSL=false&useFractionalSeconds=true
+  application:
+    name: 'client'
 
 server:
   port: 9292
