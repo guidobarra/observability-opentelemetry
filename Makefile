@@ -6,6 +6,9 @@ SHELL=/bin/bash
 docker_build:
 	docker compose -f docker/docker-compose.yml --project-directory ./docker build --no-cache
 
+docker_deploy_db:
+	docker compose -f docker/docker-compose.yml --project-directory ./docker up postgres -d
+
 docker_deploy:
 	docker compose -f docker/docker-compose.yml --project-directory ./docker up -d
 

@@ -10,7 +10,9 @@ services:
       context: ../
       dockerfile: ./docker/Dockerfile
     environment:
-      OTEL_TRACES_EXPORTER: "logging"
+      OTEL_SERVICE_NAME: "client-service"
+      OTEL_TRACES_EXPORTER: "jaeger"
+      OTEL_EXPORTER_JAEGER_ENDPOINT: "http://jaeger:14250"
       OTEL_METRICS_EXPORTER: "logging"
       OTEL_LOGS_EXPORTER: "logging"
     ports:
@@ -18,7 +20,39 @@ services:
     networks:
       - network_app
 
+  jaeger-all-in-one:
+    container_name: jaeger
+    image: jaegertracing/all-in-one:latest
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    restart: always
+    ports:
+      - "16686:16686"
+      - "14250"
+    networks:
+      - network_app
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: admin
+      POSTGRES_DB: client_db
+      PGDATA: /var/lib/postgresql/data/pg_data
+    volumes:
+      - 'postgres_data:/var/lib/postgresql/data'
+      - './postgres/:/docker-entrypoint-initdb.d/'
+    networks:
+      - network_app
 
 networks:
   network_app:
     name: network_app
+
+volumes:
+  postgres_data:
+    name: postgres_data

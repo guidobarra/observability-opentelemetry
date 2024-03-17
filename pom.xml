@@ -20,6 +20,7 @@
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
         <opentelemetry-javaagent.version>1.32.0</opentelemetry-javaagent.version>
         <jmx_prometheus_javaagent.version>0.20.0</jmx_prometheus_javaagent.version>
+        <postgresql.version>42.7.2</postgresql.version>
     </properties>
 
     <dependencies>
@@ -33,6 +34,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
 
@@ -85,6 +92,13 @@
             <groupId>io.prometheus.jmx</groupId>
             <artifactId>jmx_prometheus_javaagent</artifactId>
             <version>${jmx_prometheus_javaagent.version}</version>
+        </dependency>
+
+        <!-- POSTGRESQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
 
     </dependencies>
