@@ -18,7 +18,7 @@
         <spring-boot.version>3.2.3</spring-boot.version>
         <lombok.version>1.18.30</lombok.version>
         <springdoc-openapi.version>2.3.0</springdoc-openapi.version>
-        <opentelemetry-javaagent.version>1.32.0</opentelemetry-javaagent.version>
+        <opentelemetry-javaagent.version>1.33.0</opentelemetry-javaagent.version>
         <jmx_prometheus_javaagent.version>0.20.0</jmx_prometheus_javaagent.version>
         <postgresql.version>42.7.2</postgresql.version>
     </properties>

@@ -47,3 +47,7 @@ observability with opentelemetry for app java
 ## grafana
 
 [link](http://localhost:3000/)
+
+## loki
+
+``{job="client-service"} | json | line_format "{{.body}}"``
