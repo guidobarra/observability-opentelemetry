@@ -2,21 +2,42 @@ version: "3.6"
 
 services:
 
-  java_spring_app:
+  java-spring-app-01:
     image: java_spring_app
-    container_name: java_spring_app
-    hostname: java_spring_app
+    container_name: java-spring-app-01
+    hostname: java-spring-app-01
     build:
       context: ../
       dockerfile: ./docker/Dockerfile
     environment:
-      OTEL_SERVICE_NAME: "client-service"
-      OTEL_RESOURCE_ATTRIBUTES: "service=client-service,env=beta"
+      OTEL_SERVICE_NAME: "client-service-01"
+      OTEL_RESOURCE_ATTRIBUTES: "service=client-01,env=beta"
       OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
       # Logs are disabled by default
       OTEL_LOGS_EXPORTER: "otlp"
     ports:
       - "9292:9292"
+    depends_on:
+      - postgres
+      - collector
+    networks:
+      - network_app
+
+  java-spring-app-02:
+    image: java_spring_app
+    container_name: java-spring-app-02
+    hostname: java-spring-app-02
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    environment:
+      OTEL_SERVICE_NAME: "client-service-02"
+      OTEL_RESOURCE_ATTRIBUTES: "service=client-02,env=beta"
+      OTEL_EXPORTER_OTLP_ENDPOINT: "http://collector:4317"
+      # Logs are disabled by default
+      OTEL_LOGS_EXPORTER: "otlp"
+    ports:
+      - "9293:9292"
     depends_on:
       - postgres
       - collector
